@@ -7,11 +7,6 @@ const Hero = () => {
 	const searchRef = useRef();
 	const navigate = useNavigate();
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		navigate(`/jobs/${searchRef.current.value}`);
-	};
-
 	return (
 		<div className='w-full h-screen relative'>
 			<img className='w-full h-full object-cover' src={Heroimg}></img>

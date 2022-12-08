@@ -7,7 +7,7 @@ const Navbar2 = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		navigate(`/jobs/${searchRef.current.value}`);
+		navigate(`/jobs/${searchRef.current.value.toLowerCase()}`);
 		window.location.reload();
 	};
 
