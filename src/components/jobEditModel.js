@@ -9,6 +9,7 @@ import FormData from 'form-data';
 
 const JobEditModel = ({ currentUser }) => {
 	const [jobForm, setJobform] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const jobTitleRef = useRef();
 	const jobPhoneNoRef = useRef();
 	const jobTypeRef = useRef();
@@ -34,6 +35,7 @@ const JobEditModel = ({ currentUser }) => {
 		e.preventDefault();
 
 		try {
+			setLoading(!loading);
 			const formdata = new FormData();
 			formdata.append('image', data.image);
 			const res = await axios.post(
@@ -70,7 +72,8 @@ const JobEditModel = ({ currentUser }) => {
 			//   }),
 			// });
 			toast.success('posted ....');
-			setJobform(false);
+			setLoading(!loading);
+			setJobform(!jobForm);
 		} catch (error) {
 			toast.error('failed');
 			console.log(error.message);
@@ -295,7 +298,7 @@ const JobEditModel = ({ currentUser }) => {
 									type='button'
 									onClick={handleSubmit}
 									class='inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1'>
-									Post
+									<div class='text-center'>save</div>
 								</button>
 							</div>
 						</div>
