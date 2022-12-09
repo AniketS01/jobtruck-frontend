@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/jobtruck-frontend/static/css/main.b5270043.css",
-    "main.js": "/jobtruck-frontend/static/js/main.e9dcf64f.js",
+    "main.js": "/jobtruck-frontend/static/js/main.7cc7037d.js",
     "static/media/hero.png": "/jobtruck-frontend/static/media/hero.59f5d7b02f13190260f8.png",
     "index.html": "/jobtruck-frontend/index.html",
     "main.b5270043.css.map": "/jobtruck-frontend/static/css/main.b5270043.css.map",
-    "main.e9dcf64f.js.map": "/jobtruck-frontend/static/js/main.e9dcf64f.js.map"
+    "main.7cc7037d.js.map": "/jobtruck-frontend/static/js/main.7cc7037d.js.map"
   },
   "entrypoints": [
     "static/css/main.b5270043.css",
-    "static/js/main.e9dcf64f.js"
+    "static/js/main.7cc7037d.js"
   ]
 }
