@@ -17,7 +17,7 @@ const JobViewModal = ({ data }) => {
 		<div>
 			<button
 				type='button'
-				class='bg-none text-xl rounded text-blue-600'
+				class='bg-none text-xl rounded text-green-600'
 				data-bs-toggle='modal'
 				data-bs-target='#exampleModalScrollable'
 				onClick={(e) => {
@@ -53,7 +53,7 @@ const JobViewModal = ({ data }) => {
 									data-modal-toggle='defaultModal'>
 									<svg
 										aria-hidden='true'
-										class='w-5 h-5'
+										className='w-5 h-5'
 										fill='currentColor'
 										viewBox='0 0 20 20'
 										xmlns='http://www.w3.org/2000/svg'>
