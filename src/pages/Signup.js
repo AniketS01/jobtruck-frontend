@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
@@ -13,10 +13,12 @@ const Signup = () => {
 	const navigate = useNavigate();
 	const isOrgRef = useRef();
 	const { signUp } = UserAuth();
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			setLoading(!loading);
 			const res = await signUp(
 				nameRef.current.value,
 				emailRef.current.value,
@@ -30,6 +32,7 @@ const Signup = () => {
 				jobs: [],
 			});
 			navigate('/');
+			setLoading(!loading);
 			toast.success('Success!');
 		} catch (err) {
 			console.log(err.message);
@@ -118,12 +121,65 @@ const Signup = () => {
 									</div>
 								</div>
 							</div>
-							<button
-								type='submit'
-								onClick={handleSubmit}
-								class='w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 bg-green-500'>
-								Sign up
-							</button>
+							<div class='flex items-center justify-between'>
+								<div class='flex items-start'>
+									<div class='flex items-center h-5'>
+										<input
+											id='remember'
+											aria-describedby='remember'
+											type='checkbox'
+											class='w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800'
+											required=''
+										/>
+									</div>
+									<div class='ml-3 text-sm'>
+										<label
+											for='remember'
+											class='text-gray-500 dark:text-gray-300'>
+											Remember me
+										</label>
+									</div>
+								</div>
+								<Link
+									to={{ pathname: '/forgotpassword' }}
+									class='font-medium text-primary-600 hover:underline dark:text-primary-500 text-gray-400'>
+									forgot password
+								</Link>
+							</div>
+							<div class='flex items-center justify-center'>
+								{loading ? (
+									<button
+										type='button'
+										class='w-full flex justify-center items-center px-4 py-2 text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out bg-green-500 rounded-md shadow cursor-not-allowed hover:bg-green-400'
+										disabled=''>
+										<svg
+											class='w-5 h-5 mr-3 -ml-1 text-white animate-spin'
+											xmlns='http://www.w3.org/2000/svg'
+											fill='none'
+											viewBox='0 0 24 24'>
+											<circle
+												class='opacity-25'
+												cx='12'
+												cy='12'
+												r='10'
+												stroke='currentColor'
+												stroke-width='4'></circle>
+											<path
+												class='opacity-75'
+												fill='currentColor'
+												d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+										</svg>
+										Loading...
+									</button>
+								) : (
+									<button
+										type='button'
+										onClick={handleSubmit}
+										class='w-full flex justify-center items-center px-4 py-2 text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out bg-green-500 rounded-md shadow  hover:bg-green-400'>
+										Sign In
+									</button>
+								)}
+							</div>
 							<p class='text-sm font-light text-gray-500 dark:text-gray-400'>
 								Already have an account?{' '}
 								<Link

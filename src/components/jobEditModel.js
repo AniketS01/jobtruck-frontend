@@ -20,7 +20,7 @@ const JobEditModel = ({ currentUser }) => {
 	const jobSkillsRef = useRef();
 	const descriptionRef = useRef();
 	const { postJob } = UserJob();
-	const userId = doc(db, 'users', `${currentUser.id}`);
+
 	const [data, setData] = useState({
 		name: '',
 		image: '',
