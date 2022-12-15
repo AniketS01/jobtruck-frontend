@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import Avatar from 'react-avatar';
 import JobViewModal from './JobViewModal';
 import {
 	HiOutlineCurrencyRupee,

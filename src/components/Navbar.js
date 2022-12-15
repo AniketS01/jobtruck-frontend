@@ -76,7 +76,13 @@ const Navbar = () => {
 				) : (
 					<>
 						<ul>
-							<li onClick={(e) => navigate('/signin')}>Sign in</li>
+							<li>
+								<button
+									onClick={(e) => navigate('/signup')}
+									class='bg-green-500 hover:bg-blue-700 text-white md:text-lg text-sm py-1 px-3 rounded'>
+									Register
+								</button>
+							</li>
 						</ul>
 					</>
 				)}

@@ -35,6 +35,7 @@ const Signup = () => {
 			setLoading(!loading);
 			toast.success('Success!');
 		} catch (err) {
+			setLoading(false);
 			console.log(err.message);
 			toast.error('failed!');
 		}
@@ -100,46 +101,8 @@ const Signup = () => {
 									required=''
 								/>
 							</div>
+
 							<div class='flex items-center justify-between'>
-								<div class='flex items-start'>
-									<div class='flex items-center h-5'>
-										<input
-											id='remember'
-											ref={isOrgRef}
-											aria-describedby='remember'
-											type='checkbox'
-											class='w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800'
-											required=''
-										/>
-									</div>
-									<div class='ml-3 text-sm'>
-										<label
-											for='remember'
-											class='text-gray-500 dark:text-gray-300'>
-											Are you a employer?
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class='flex items-center justify-between'>
-								<div class='flex items-start'>
-									<div class='flex items-center h-5'>
-										<input
-											id='remember'
-											aria-describedby='remember'
-											type='checkbox'
-											class='w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800'
-											required=''
-										/>
-									</div>
-									<div class='ml-3 text-sm'>
-										<label
-											for='remember'
-											class='text-gray-500 dark:text-gray-300'>
-											Remember me
-										</label>
-									</div>
-								</div>
 								<Link
 									to={{ pathname: '/forgotpassword' }}
 									class='font-medium text-primary-600 hover:underline dark:text-primary-500 text-gray-400'>
@@ -176,7 +139,7 @@ const Signup = () => {
 										type='button'
 										onClick={handleSubmit}
 										class='w-full flex justify-center items-center px-4 py-2 text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out bg-green-500 rounded-md shadow  hover:bg-green-400'>
-										Sign In
+										Register
 									</button>
 								)}
 							</div>

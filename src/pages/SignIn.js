@@ -19,6 +19,7 @@ const SignIn = () => {
 			toast.success('success');
 			setLoading(!loading);
 		} catch (error) {
+			setLoading(false);
 			toast.error('failed!');
 		}
 	};

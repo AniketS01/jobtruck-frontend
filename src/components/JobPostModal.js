@@ -320,7 +320,7 @@ const JobPostModal = ({ currentUser }) => {
 											type='button'
 											onClick={handleSubmit}
 											class='w-full flex justify-center items-center px-4 py-2 text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out bg-green-500 rounded-md shadow  hover:bg-green-400'>
-											Sign In
+											Create
 										</button>
 									)}
 								</div>
