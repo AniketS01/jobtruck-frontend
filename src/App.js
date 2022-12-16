@@ -14,7 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/Footer';
 import FilteredJobs from './pages/FilteredJobs';
-import Navbar2 from './components/Navbar2';
+import { motion } from 'framer-motion';
 
 const App = () => {
 	return (
