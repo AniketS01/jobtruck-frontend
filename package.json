@@ -1,7 +1,6 @@
 {
 	"name": "jobtruck",
 	"version": "0.1.0",
-	//"homepage": "http://anikets01.github.io/jobtruck-frontend",
 	"homepage":"http://thejobtruck.com",
 	"private": true,
 	"dependencies": {
