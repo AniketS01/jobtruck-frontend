@@ -18,34 +18,33 @@ const Navbar = () => {
 	};
 
 	return (
-		<AnimatePresence exitBeforeEnter>
-			<div>
-				<div className='flex w-full justify-between p-3 md:py-1 items-center z-10 text-black dark:bg-white shadow-lg'>
-					<p className='text-xl p-2 md:p-0 md:text-3xl font-bold'>
-						<span className='text-green-500'>JOB</span>
-						<span className='text-gray-600'>TRUCK</span>
-					</p>
-					{user?.email ? (
-						<>
-							{' '}
-							<ul className='hidden md:flex text-blue-900'>
-								<li onClick={(e) => navigate('/')}>Home</li>
-								<li onClick={(e) => navigate('/jobs')}>Jobs</li>
-								<li onClick={(e) => navigate('/dashboard')}>account</li>
-								<li onClick={logOut}>signOut</li>
-							</ul>
-							<div onClick={handleNav} className='md:hidden z-10'>
-								{nav ? (
-									<AiOutlineClose size={20} />
-								) : (
-									<AiOutlineMenu size={20} />
-								)}
-							</div>
+		<div>
+			<div className='flex w-full justify-between p-3 md:py-1 items-center z-10 text-black dark:bg-white shadow-lg'>
+				<motion.p
+					className='text-xl p-2 md:p-0 md:text-3xl font-bold'
+					initial={{ y: -250 }}
+					animate={{ y: 0 }}>
+					<span className='text-green-500'>JOB</span>
+					<span className='text-gray-600'>TRUCK</span>
+				</motion.p>
+				{user?.email ? (
+					<>
+						{' '}
+						<ul className='hidden md:flex text-blue-900'>
+							<li onClick={(e) => navigate('/')}>Home</li>
+							<li onClick={(e) => navigate('/jobs')}>Jobs</li>
+							<li onClick={(e) => navigate('/dashboard')}>account</li>
+							<li onClick={logOut}>signOut</li>
+						</ul>
+						<div onClick={handleNav} className='md:hidden z-10'>
+							{nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
+						</div>
+						<AnimatePresence>
 							{nav && (
 								<motion.div
-									initial={{ y: -250 }}
+									initial={{ y: -350 }}
 									animate={{ y: 0 }}
-									transition={{ delay: 0 }}
+									exit={{ y: -350 }}
 									onClick={handleNav}
 									// className={
 									// 	nav
@@ -81,22 +80,23 @@ const Navbar = () => {
 									</ul>
 								</motion.div>
 							)}
-						</>
-					) : (
-						<>
-							<ul>
-								<li>
-									<button
-										onClick={(e) => navigate('/signup')}
-										class='bg-green-500 hover:bg-blue-700 text-white md:text-lg text-sm py-1 px-3 rounded'>
-										Register
-									</button>
-								</li>
-							</ul>
-						</>
-					)}
+						</AnimatePresence>
+					</>
+				) : (
+					<>
+						<ul>
+							<li>
+								<button
+									onClick={(e) => navigate('/signup')}
+									class='bg-green-500 hover:bg-blue-700 text-white md:text-lg text-sm py-1 px-3 rounded'>
+									Register
+								</button>
+							</li>
+						</ul>
+					</>
+				)}
 
-					{/* {user?.email ? (
+				{/* {user?.email ? (
         <div className="flex items-center">
           <button className="cursor-pointer pr-4">
             <Avatar
@@ -129,10 +129,9 @@ const Navbar = () => {
           </button>
         </div>
       )} */}
-				</div>
-				<div>{location.pathname.includes('jobs') && <Navbar2 />}</div>
 			</div>
-		</AnimatePresence>
+			<div>{location.pathname.includes('jobs') && <Navbar2 />}</div>
+		</div>
 	);
 };
 
