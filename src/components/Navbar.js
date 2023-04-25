@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { UserAuth } from '../context/AuthContext';
-import { motion, AnimatePresence } from 'framer-motion';
-
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import Navbar2 from './Navbar2';
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
+import { motion, AnimatePresence } from "framer-motion";
+import img from "../images/jobtruck2.png";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import Navbar2 from "./Navbar2";
 
 const Navbar = () => {
   const { user, logOut } = UserAuth();
@@ -19,27 +19,26 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className='flex w-full justify-between p-3 md:py-1 items-center z-10 text-black dark:bg-white shadow-lg'>
+      <div className="flex w-full justify-between p-3 md:py-1 items-center z-10 text-black dark:bg-white shadow-lg">
         <motion.p
-          className='text-xl p-2 md:p-0 md:text-3xl font-bold'
+          className="text-xl p-2 md:p-0 md:text-3xl font-bold"
           initial={{ y: -250 }}
           animate={{ y: 0 }}
         >
-          <div onClick={(e) => navigate('/')}>
-            <span className='text-green-500'>JOB</span>
-            <span className='text-gray-600'>TRUCK</span>
+          <div className="ml-4" onClick={(e) => navigate("/")}>
+            <img src={img} className="w-[180px] md:w-[240px]" />
           </div>
         </motion.p>
         {user?.email ? (
           <>
-            {' '}
-            <ul className='hidden md:flex text-blue-900'>
-              <li onClick={(e) => navigate('/')}>Home</li>
-              <li onClick={(e) => navigate('/jobs')}>Jobs</li>
-              <li onClick={(e) => navigate('/dashboard')}>account</li>
+            {" "}
+            <ul className="hidden md:flex text-blue-900">
+              <li onClick={(e) => navigate("/")}>Home</li>
+              <li onClick={(e) => navigate("/jobs")}>Jobs</li>
+              <li onClick={(e) => navigate("/dashboard")}>account</li>
               <li onClick={logOut}>signOut</li>
             </ul>
-            <div onClick={handleNav} className='md:hidden z-10'>
+            <div onClick={handleNav} className="md:hidden z-10">
               {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
             </div>
             <AnimatePresence>
@@ -55,33 +54,33 @@ const Navbar = () => {
                   // 		: 'absolute left-[-100%]'
                   // }
                   className={
-                    'absolute left-0 top-0 w-full bg-gray-100/90 px-4 py-7 flex flex-col z-40'
+                    "absolute left-0 top-0 w-full bg-gray-100/90 px-4 py-7 flex flex-col z-40"
                   }
                 >
                   <ul>
-                    <h1 className='text-2xl font-bold'>
-                      <span className='text-green-500'>JOB</span>
-                      <span className='text-blue-900'>TRUCK</span>
+                    <h1 className="text-2xl font-bold">
+                      <span className="text-green-500">JOB</span>
+                      <span className="text-blue-900">TRUCK</span>
                     </h1>
                     <li
-                      className='border-b text-blue-900'
-                      onClick={(e) => navigate('/')}
+                      className="border-b text-blue-900"
+                      onClick={(e) => navigate("/")}
                     >
                       Home
                     </li>
                     <li
-                      className='border-b text-blue-900'
-                      onClick={(e) => navigate('/jobs')}
+                      className="border-b text-blue-900"
+                      onClick={(e) => navigate("/jobs")}
                     >
                       Jobs
                     </li>
                     <li
-                      className='text-blue-900'
-                      onClick={(e) => navigate('/dashboard')}
+                      className="text-blue-900"
+                      onClick={(e) => navigate("/dashboard")}
                     >
                       account
                     </li>
-                    <li className='text-blue-900' onClick={logOut}>
+                    <li className="text-blue-900" onClick={logOut}>
                       signOut
                     </li>
                   </ul>
@@ -94,8 +93,8 @@ const Navbar = () => {
             <ul>
               <li>
                 <button
-                  onClick={(e) => navigate('/signup')}
-                  class='bg-green-500 hover:bg-blue-700 text-white md:text-lg text-sm py-1 px-3 rounded'
+                  onClick={(e) => navigate("/signup")}
+                  class="bg-green-500 hover:bg-blue-700 text-white md:text-lg text-sm py-1 px-3 rounded"
                 >
                   Register
                 </button>
@@ -138,7 +137,7 @@ const Navbar = () => {
         </div>
       )} */}
       </div>
-      <div>{location.pathname.includes('jobs') && <Navbar2 />}</div>
+      <div>{location.pathname.includes("jobs") && <Navbar2 />}</div>
     </div>
   );
 };
