@@ -1,11 +1,11 @@
-import axios from 'axios';
-import { doc } from 'firebase/firestore';
-import React, { useState, useRef } from 'react';
-import { toast } from 'react-toastify';
-import { UserJob } from '../context/JobContext';
-import { db } from '../firebase';
-import _ from 'lodash';
-import FormData from 'form-data';
+import axios from "axios";
+import { doc } from "firebase/firestore";
+import React, { useState, useRef } from "react";
+import { toast } from "react-toastify";
+import { UserJob } from "../context/JobContext";
+import { db } from "../firebase";
+import _ from "lodash";
+import FormData from "form-data";
 
 const JobPostModal = ({ currentUser }) => {
   const [jobForm, setJobform] = useState(false);
@@ -22,12 +22,12 @@ const JobPostModal = ({ currentUser }) => {
   const { postJob } = UserJob();
 
   const [data, setData] = useState({
-    name: '',
-    image: '',
+    name: "",
+    image: "",
   });
 
   const handleChange = (name) => (e) => {
-    const value = name === 'image' ? e.target.files[0] : e.target.value;
+    const value = name === "image" ? e.target.files[0] : e.target.value;
     setData({ ...data, [name]: value });
   };
 
@@ -37,9 +37,9 @@ const JobPostModal = ({ currentUser }) => {
     try {
       setLoading(!loading);
       const formdata = new FormData();
-      formdata.append('image', data.image);
+      formdata.append("image", data.image);
       const res = await axios.post(
-        'https://jobtruckbackend.onrender.com/uploadimg',
+        "https://jobtruckbackend.onrender.com/uploadimg",
         formdata
       );
       await postJob(
@@ -71,274 +71,271 @@ const JobPostModal = ({ currentUser }) => {
       //     createAt: Timestamp.now(),
       //   }),
       // });
-      toast.success('posted ....');
+      toast.success("posted ....");
       setLoading(false);
       setJobform(false);
     } catch (error) {
       setLoading(false);
-      toast.error('failed');
+      toast.error("failed");
       console.log(error.message);
     }
   };
 
   return (
     <div>
-      <div className='flex justify-center'>
+      <div className="flex justify-center">
         <button
-          type='button'
-          class='inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
-          data-bs-toggle='modal'
-          data-bs-target='#exampleModalScrollable'
+          type="button"
+          class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModalScrollable"
           onClick={(e) => setJobform(true)}
         >
           Post job
         </button>
       </div>
       {jobForm && (
-        <div class='modal fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto z-40 bg-black bg-opacity-75'>
-          <div class='modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none'>
-            <div class='modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current'>
-              <div class='modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md'>
+        <div class="modal fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto z-40 bg-black bg-opacity-75">
+          <div class="modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none">
+            <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+              <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                 <h5
-                  class='text-xl font-medium leading-normal text-gray-800'
-                  id='exampleModalScrollableLabel'
+                  class="text-xl font-medium leading-normal text-gray-800"
+                  id="exampleModalScrollableLabel"
                 >
                   Create a job
                 </h5>
                 <button
-                  type='button'
-                  class='btn-close box-content w-4 h-4 p-1 text-black  rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline'
-                  data-bs-dismiss='modal'
-                  aria-label='Close'
+                  type="button"
+                  class="btn-close box-content w-4 h-4 p-1 text-black  rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
                   onClick={(e) => setJobform(!jobForm)}
                 ></button>
               </div>
-              <div class='modal-body relative p-4'>
+              <div class="modal-body relative p-4">
                 <form>
-                  <div class='relative z-0 mb-6 w-full group'>
+                  <div class="relative z-0 mb-6 w-full group">
                     <input
-                      type='text'
+                      type="text"
                       ref={jobTitleRef}
-                      class='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                      placeholder=' '
-                      required=''
+                      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                      placeholder=" "
+                      required=""
                     />
-                    <label class='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'>
+                    <label class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                       Job post
                     </label>
                   </div>
-                  <div class='grid md:grid-cols-2 md:gap-6'>
-                    <div class='relative z-0 mb-6 w-full group'>
-                      <div className='flex'>
+                  <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 mb-6 w-full group">
+                      <div className="flex">
                         <input
-                          type='text'
+                          type="text"
                           ref={jobStartTimingRef}
-                          name='floating_first_name'
-                          id='floating_first_name'
-                          class='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                          placeholder=' '
-                          required=''
+                          name="floating_first_name"
+                          id="floating_first_name"
+                          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "
+                          required=""
                         />
                         <select
-                          id='countries'
-                          class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                          id="countries"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5"
                         >
                           <option selected>AM</option>
-                          <option value='US'>PM</option>
+                          <option value="US">PM</option>
                         </select>
                       </div>
                       <label
-                        for='floating_first_name'
-                        class='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+                        for="floating_first_name"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                       >
                         Job start time
                       </label>
                     </div>
-                    <div class='relative z-0 mb-6 w-full group'>
-                      <div className='flex'>
+                    <div class="relative z-0 mb-6 w-full group">
+                      <div className="flex">
                         <input
-                          type='text'
+                          type="text"
                           ref={jobEndTimeRef}
-                          class='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                          placeholder=' '
-                          required=''
+                          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "
+                          required=""
                         />
                         <select
-                          id='countries'
-                          class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                          id="countries"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5"
                         >
                           <option selected>PM</option>
-                          <option value='US'>AM</option>
+                          <option value="US">AM</option>
                         </select>
                       </div>
                       <label
-                        for='floating_last_name'
-                        class='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+                        for="floating_last_name"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                       >
                         Job end time
                       </label>
                     </div>
                   </div>
-                  <div class='relative z-0 mb-6 w-full group'>
+                  <div class="relative z-0 mb-6 w-full group">
                     <input
-                      type='text'
+                      type="text"
                       ref={jobSalaryRef}
-                      class='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                      placeholder=' '
-                      required=''
+                      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                      placeholder=" "
+                      required=""
                     />
                     <label
-                      for='floating_last_name'
-                      class='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+                      for="floating_last_name"
+                      class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
                       salary
                     </label>
                   </div>
-                  <div class='relative z-0 mb-6 w-full group'>
+                  <div class="relative z-0 mb-6 w-full group">
                     <input
-                      type='text'
+                      type="text"
                       ref={jobTypeRef}
-                      name='floating_password'
-                      id='floating_password'
-                      class='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                      placeholder=' '
-                      required=''
+                      name="floating_password"
+                      id="floating_password"
+                      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                      placeholder=" "
+                      required=""
                     />
                     <label
-                      for='floating_password'
-                      class='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+                      for="floating_password"
+                      class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
                       Job type
                     </label>
                   </div>
-                  <div class='relative z-0 mb-6 w-full group'>
+                  <div class="relative z-0 mb-6 w-full group">
                     <input
-                      type='text'
+                      type="text"
                       ref={jobLocationRef}
-                      name='repeat_password'
-                      id='floating_repeat_password'
-                      class='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                      placeholder=' '
-                      required=''
+                      name="repeat_password"
+                      id="floating_repeat_password"
+                      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                      placeholder=" "
+                      required=""
                     />
                     <label
-                      for='floating_repeat_password'
-                      class='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+                      for="floating_repeat_password"
+                      class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
                       Address
                     </label>
                   </div>
-                  <div class='grid md:grid-cols-2 md:gap-6'>
-                    <div class='relative z-0 mb-6 w-full group'>
+                  <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 mb-6 w-full group">
                       <input
-                        type='tel'
+                        type="tel"
                         ref={jobPhoneNoRef}
-                        pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
-                        name='floating_phone'
-                        id='floating_phone'
-                        class='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                        placeholder=' '
-                        required=''
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        name="floating_phone"
+                        id="floating_phone"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder=" "
+                        required=""
                       />
                       <label
-                        for='floating_phone'
-                        class='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+                        for="floating_phone"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                       >
                         Phone number (123-456-7890)
                       </label>
                     </div>
 
-                    <div class='relative z-0 mb-6 w-full group'>
+                    <div class="relative z-0 mb-6 w-full group">
                       <input
-                        type='text'
+                        type="text"
                         ref={jobSkillsRef}
-                        class='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                        placeholder=' '
-                        required=''
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder=" "
+                        required=""
                       />
                       <label
-                        for='floating_company'
-                        class='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+                        for="floating_company"
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                       >
                         Skills
                       </label>
                     </div>
                   </div>
-                  <div class='relative z-0 mb-6 w-full group'>
+                  <div class="relative z-0 mb-6 w-full group">
                     <input
-                      type='text'
+                      type="text"
                       ref={descriptionRef}
-                      name='repeat_password'
-                      id='floating_repeat_password'
-                      class='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                      placeholder=' '
-                      required=''
+                      name="repeat_password"
+                      id="floating_repeat_password"
+                      class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                      placeholder=" "
+                      required=""
                     />
                     <label
-                      for='floating_repeat_password'
-                      class='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+                      for="floating_repeat_password"
+                      class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
                       Job Description
                     </label>
                   </div>
                   <div>
                     <label
-                      class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                      for='file_input'
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                      for="file_input"
                     >
                       Upload file
                     </label>
                     <input
-                      class='block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
-                      aria-describedby='file_input_help'
-                      id='file_input'
-                      type='file'
-                      onChange={handleChange('image')}
+                      class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer"
+                      aria-describedby="file_input_help"
+                      id="file_input"
+                      type="file"
+                      onChange={handleChange("image")}
                     />
-                    <p
-                      class='mt-1 text-sm text-gray-500 dark:text-gray-300'
-                      id='file_input_help'
-                    >
+                    <p class="mt-1 text-sm text-gray-500" id="file_input_help">
                       SVG, PNG, JPG or GIF (MAX. 800x400px).
                     </p>
                   </div>
                 </form>
               </div>
-              <div class='modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md'>
-                <div class='flex items-center justify-center w-full'>
+              <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                <div class="flex items-center justify-center w-full">
                   {loading ? (
                     <button
-                      type='button'
-                      class='w-full flex justify-center items-center px-4 py-2 text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out bg-green-500 rounded-md shadow cursor-not-allowed hover:bg-green-400'
-                      disabled=''
+                      type="button"
+                      class="w-full flex justify-center items-center px-4 py-2 text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out bg-green-500 rounded-md shadow cursor-not-allowed hover:bg-green-400"
+                      disabled=""
                     >
                       <svg
-                        class='w-5 h-5 mr-3 -ml-1 text-white animate-spin'
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
+                        class="w-5 h-5 mr-3 -ml-1 text-white animate-spin"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
                       >
                         <circle
-                          class='opacity-25'
-                          cx='12'
-                          cy='12'
-                          r='10'
-                          stroke='currentColor'
-                          stroke-width='4'
+                          class="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          stroke-width="4"
                         ></circle>
                         <path
-                          class='opacity-75'
-                          fill='currentColor'
-                          d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                          class="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                         ></path>
                       </svg>
                       Loading...
                     </button>
                   ) : (
                     <button
-                      type='button'
+                      type="button"
                       onClick={handleSubmit}
-                      class='w-full flex justify-center items-center px-4 py-2 text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out bg-green-500 rounded-md shadow  hover:bg-green-400'
+                      class="w-full flex justify-center items-center px-4 py-2 text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out bg-green-500 rounded-md shadow  hover:bg-green-400"
                     >
                       Create
                     </button>
