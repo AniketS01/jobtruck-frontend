@@ -25,8 +25,8 @@ const Navbar = () => {
           initial={{ y: -250 }}
           animate={{ y: 0 }}
         >
-          <div className="ml-4" onClick={(e) => navigate("/")}>
-            <img src={img} className="w-[180px] md:w-[240px]" />
+          <div className="" onClick={(e) => navigate("/")}>
+            <img src={img} className="w-[150px] md:w-[240px]" />
           </div>
         </motion.p>
         {user?.email ? (
