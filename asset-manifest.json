@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.1ccb8b09.css",
-    "main.js": "/static/js/main.cd261072.js",
+    "main.css": "/static/css/main.13f700bc.css",
+    "main.js": "/static/js/main.5341b42d.js",
     "static/media/hero.png": "/static/media/hero.59f5d7b02f13190260f8.png",
     "static/media/jobtruck2.png": "/static/media/jobtruck2.9ff0a7524bd11c978685.png",
     "index.html": "/index.html",
-    "main.1ccb8b09.css.map": "/static/css/main.1ccb8b09.css.map",
-    "main.cd261072.js.map": "/static/js/main.cd261072.js.map"
+    "main.13f700bc.css.map": "/static/css/main.13f700bc.css.map",
+    "main.5341b42d.js.map": "/static/js/main.5341b42d.js.map"
   },
   "entrypoints": [
-    "static/css/main.1ccb8b09.css",
-    "static/js/main.cd261072.js"
+    "static/css/main.13f700bc.css",
+    "static/js/main.5341b42d.js"
   ]
 }
