@@ -30,7 +30,6 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
-    const use = {};
     onSnapshot(q, (snap) => {
       snap.docs.forEach((doc) => {
         setCurrentUser({
@@ -39,8 +38,10 @@ const Dashboard = () => {
           id: doc.id,
           isOrg: doc.data().isOrg,
           phoneNo: doc.data().phoneNo,
-          jobs: doc.data().jobs,
+
           dp: doc.data().dp,
+          city: doc.data().city,
+          state: doc.data().state,
         });
       });
     });

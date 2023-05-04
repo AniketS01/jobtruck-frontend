@@ -1,11 +1,13 @@
 import axios from "axios";
 import { doc } from "firebase/firestore";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import { UserJob } from "../context/JobContext";
 import { db } from "../firebase";
 import _ from "lodash";
 import FormData from "form-data";
+import { state_arr, s_a } from "../constants/StateCity";
+import Select from "react-select";
 
 const JobPostModal = ({ currentUser }) => {
   const [jobForm, setJobform] = useState(false);
@@ -20,7 +22,9 @@ const JobPostModal = ({ currentUser }) => {
   const jobSkillsRef = useRef();
   const descriptionRef = useRef();
   const { postJob } = UserJob();
-
+  const [state, setState] = useState();
+  const [cities, setCities] = useState([]);
+  const [city, setCity] = useState();
   const [data, setData] = useState({
     name: "",
     image: "",
@@ -55,7 +59,9 @@ const JobPostModal = ({ currentUser }) => {
         jobPhoneNoRef.current.value,
         descriptionRef.current.value,
         res.data.resl.url,
-        res.data.resl.id
+        res.data.resl.id,
+        state_arr[state],
+        cities[city]
       );
       // await updateDoc(userId, {
       //   jobs: arrayUnion({
@@ -79,6 +85,11 @@ const JobPostModal = ({ currentUser }) => {
       toast.error("failed");
       console.log(error.message);
     }
+  };
+
+  const getCities = (k) => {
+    k = parseInt(k) + 1;
+    setCities(s_a[k].split("|"));
   };
 
   return (
@@ -228,7 +239,50 @@ const JobPostModal = ({ currentUser }) => {
                       Address
                     </label>
                   </div>
-                  <div class="grid md:grid-cols-2 md:gap-6">
+                  <div className="grid md:grid-cols-2 md:gap-6">
+                    <div>
+                      <label
+                        for="countries"
+                        class="block mb-1 text-sm font-medium text-gray-500"
+                      >
+                        Select a state
+                      </label>
+                      <select
+                        id="countries"
+                        onChange={(e) => {
+                          setState(e.target.value);
+                          const k = e.target.value;
+                          getCities(k);
+                        }}
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                      >
+                        <option selected>choose a state</option>
+                        {state_arr.map((state, index) => (
+                          <option value={index}>{state}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label
+                        for="countries"
+                        class="block mb-1 text-sm font-medium text-gray-500"
+                      >
+                        Select a city
+                      </label>
+                      <select
+                        id="cities"
+                        onChange={(e) => setCity(e.target.value)}
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+                      >
+                        <option selected>choose a city</option>
+                        {cities.map((city, index) => (
+                          <option value={index}>{city}</option>
+                        ))}
+                      </select>
+                    </div>
+                    {console.log(currentUser)}
+                  </div>
+                  <div class="grid md:grid-cols-2 md:gap-6 mt-2.5">
                     <div class="relative z-0 mb-6 w-full group">
                       <input
                         type="tel"
