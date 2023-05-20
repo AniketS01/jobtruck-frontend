@@ -125,20 +125,13 @@ export const JobCard = ({ data, showdelete }) => {
                     <div class="relative z-0 mb-6 w-full group">
                       <div className="flex">
                         <input
-                          type="text"
+                          type="time"
                           onChange={(e) => setStartTime(e.target.value)}
                           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                           placeholder=" "
                           required=""
                           value={startTime}
                         />
-                        <select
-                          id="countries"
-                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5"
-                        >
-                          <option selected>AM</option>
-                          <option value="US">PM</option>
-                        </select>
                       </div>
                       <label
                         for="floating_first_name"
@@ -150,20 +143,13 @@ export const JobCard = ({ data, showdelete }) => {
                     <div class="relative z-0 mb-6 w-full group">
                       <div className="flex">
                         <input
-                          type="text"
+                          type="time"
                           onChange={(e) => setEndTime(e.target.value)}
                           class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                           placeholder=" "
                           required=""
                           value={endTime}
                         />
-                        <select
-                          id="countries"
-                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5"
-                        >
-                          <option selected>PM</option>
-                          <option value="US">AM</option>
-                        </select>
                       </div>
                       <label
                         for="floating_last_name"
@@ -415,20 +401,20 @@ export const JobCard = ({ data, showdelete }) => {
             <div>
               {showdelete && (
                 <button
-                  class="bg-none hover:bg-red-200 font-bold py-1 px-2 rounded-full z-50"
+                  class="bg-red-600 text-white text-[12px] md:text-sm hover:bg-red-200 font-bold py-1 px-2 rounded-full z-50"
                   onClick={(e) => deleteJob(data.id)}
                 >
-                  <MdDeleteOutline size={25} color={"red"} />
+                  Delete
                 </button>
               )}
             </div>
             <div className="ml-2">
               {showdelete && (
                 <button
-                  class="bg-none hover:bg-green-700 font-bold py-1 px-2 rounded-full z-50"
+                  class="bg-green-600 text-white text-[12px] md:text-sm hover:bg-green-700 font-bold py-1 px-2 rounded-full z-50"
                   onClick={(e) => setShowEditModel(!showEditModal)}
                 >
-                  <FiEdit size={22} />
+                  Edit
                 </button>
               )}
             </div>
